@@ -51,7 +51,13 @@ const Container = styled.div`
     &::-webkit-scrollbar {
       width: 0.7rem;
       &-thumb {
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(100, 100, 100, 0.8);
+        &:hover {
+          background: rgba(150, 150, 150, 0.8);
+        }
+        &:active {
+          background-color: rgba(255, 255, 255, 0.7);
+        }
       }
     }
     li {
@@ -63,5 +69,5 @@ const Container = styled.div`
         color: #fff;
       }
     }
-  }
+  } 
 `;
