@@ -2,13 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-<<<<<<< HEAD
 import { StateProvider } from "./utils/StateProvider";
-import reducer, { initialState } from "./utils/reducer"
-=======
-import { StateProvider } from './utils/StateProvider';
-import reducer, {initialState} from './utils/reducer';
->>>>>>> errors_fixed
+import reducer, { initialState } from "./utils/Reducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
