@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { FaSearch} from 'react-icons/fa';
-import { CgProfile} from 'react-icons/cg';
+import { FaSearch, FaUser} from 'react-icons/fa';
 import { useStateProvider } from '../utils/StateProvider';
 export default function Navbar() {
   const [{userInfo}] = useStateProvider();
@@ -13,7 +12,7 @@ export default function Navbar() {
       </div>
       <div className="avatar">
         <a href="#">
-          <CgProfile />
+          <FaUser />
           <span>{userInfo?.userName}</span>
         </a>
       </div>
