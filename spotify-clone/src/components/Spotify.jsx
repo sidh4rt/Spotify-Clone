@@ -72,6 +72,18 @@ grid-template-rows: 85vh 15vh;
     height: 100%;
     width: 100%;
     overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+      &-thumb {
+        background-color: rgba(100, 100, 100, 0.8);
+        &:hover {
+          background: rgba(150, 150, 150, 0.8);
+        }
+        &:active {
+          background-color: rgba(255, 255, 255, 0.7);
+        }
+      }
+    }
   }
 }
 `;

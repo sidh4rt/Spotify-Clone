@@ -5,7 +5,7 @@ import { useStateProvider } from '../utils/StateProvider';
 import { reducerCases } from '../utils/Constants';
 import axios from 'axios';
 
-export default function Body() {
+export default function Body({ headerBackground }) {
   const [{ token, selectedPlaylist ,selectedPlaylistId }, dispatch] = useStateProvider();
   useEffect(()=> {
     const getInitialPlaylist = async () => {
@@ -41,8 +41,13 @@ export default function Body() {
     };
     getInitialPlaylist();
   }, [token, dispatch, selectedPlaylistId]);
+  const msToMinAndSec = (ms) => {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ":"  + ( seconds < 10 ? "0" : "" ) + seconds;
+  }
 
-  return <Container>
+  return <Container headerBackground={ headerBackground }>
     {
       selectedPlaylist && (
         <>
@@ -106,7 +111,7 @@ export default function Body() {
                         <span>{album}</span>
                       </div>
                       <div className="col">
-                        <span>{duration}</span>
+                        <span>{msToMinAndSec(duration)}</span>
                       </div>
                     </div>
                   );
