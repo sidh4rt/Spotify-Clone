@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import {AiFillClockCircle} from 'react-icons/ai'
+import {AiOutlineClockCircle} from 'react-icons/ai';
 import { useStateProvider } from '../utils/StateProvider';
 import { reducerCases } from '../utils/Constants';
 import axios from 'axios';
@@ -74,7 +74,7 @@ export default function Body({ headerBackground }) {
               </div>
               <div className="col">
                 <span>
-                  <AiFillClockCircle />
+                  <AiOutlineClockCircle />
                 </span>
               </div>
             </div>
