@@ -9,15 +9,14 @@ export default function CurrentTrack() {
   useEffect(() => {
     const getCurrentTrack = async () => {
       const response = await axios.get(
-        "https://api.spotify.com/v1/me/player/currently-playing",
+        "https://api.spotify.com/v1/me/player/currently-playing", 
         {
           headers: {
             Authorization: "Bearer " + token,
             "Content-Type": "application/json",
           },
         }
-      );
-      console.log(response);     
+      ); 
       if (response!=="") {
         const { item } = response.data;
         const currentlyPlaying = {
@@ -27,7 +26,9 @@ export default function CurrentTrack() {
           image: item.album.images[2].url,
         };
         dispatch({ type: reducerCases.SET_PLAYING, currentlyPlaying });
-      }
+      } else {
+        dispatch({ type: reducerCases.SET_PLAYING, currentlyPlaying:null });
+      } 
     };
     getCurrentTrack();
   }, [token, dispatch]);
@@ -48,7 +49,7 @@ export default function CurrentTrack() {
       )}
     </Container>
   );
-}
+} 
 
 const Container = styled.div`
   .track {

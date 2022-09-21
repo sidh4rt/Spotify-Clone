@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components';
 import CurrentTrack from './CurrentTrack';
+import PlayerControls from './PlayerControls';
 
-function Footer() {
+export default function Footer() {
   return ( 
     <Container> 
       <CurrentTrack />
+      <PlayerControls />
     </Container>
   );
 }
-
-export default Footer;
 
 const Container = styled.div`
   background-color: #181818;
