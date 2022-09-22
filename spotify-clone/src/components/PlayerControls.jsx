@@ -30,7 +30,7 @@ export default function PlayerControls() {
       type: reducerCases.SET_PLAYER_STATE, 
       playerState: !playerState,
     });
-  };
+  }
   const changeTrack = async (type) => {
     await axios.post(
       `https://api.spotify.com/v1/me/player/${type}`,
@@ -52,7 +52,7 @@ export default function PlayerControls() {
         },
       }
     );
-    if (response1 !== "") {
+    if (response1.data !== "") {
       const { item } = response1.data;
       const currentlyPlaying = {
         id: item.id,
@@ -69,23 +69,23 @@ export default function PlayerControls() {
   return (
     <Container>
       <div className="shuffle">
-        <BsShuffle /> 
+        <BsShuffle />
       </div>
       <div className="previous">
-        <CgPlayTrackPrev onClick={()=> changeTrack("previous")} />
+        <CgPlayTrackPrev onClick={() => changeTrack("previous")} />
       </div>
       <div className="state">
         {playerState ? (
-          <BsFillPauseCircleFill onClick={changeState}/>
+          <BsFillPauseCircleFill onClick={changeState} />
         ) : (
           <BsFillPlayCircleFill onClick={changeState} />
         )}
       </div>
       <div className="next">
-        <CgPlayTrackNext onClick={()=> changeTrack("next")} />
+        <CgPlayTrackNext onClick={() => changeTrack("next")} />
       </div>
       <div className="repeat">
-        <FiRepeat /> 
+        <FiRepeat />
       </div>
     </Container>
   );
