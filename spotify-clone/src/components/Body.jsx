@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import {AiOutlineClockCircle} from 'react-icons/ai';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 import { useStateProvider } from '../utils/StateProvider';
 import { reducerCases } from '../utils/Constants';
 import axios from 'axios';
@@ -9,7 +9,6 @@ export default function Body({ headerBackground }) {
   const [{ token, selectedPlaylist ,selectedPlaylistId }, dispatch] = useStateProvider();
   useEffect(()=> {
     const getInitialPlaylist = async () => {
-      console.log(selectedPlaylistId);
       const response = await axios.get(
         `https://api.spotify.com/v1/playlists/${ selectedPlaylistId }`,
         {
@@ -45,6 +44,38 @@ export default function Body({ headerBackground }) {
     const minutes = Math.floor(ms / 60000);
     const seconds = ((ms % 60000) / 1000).toFixed(0);
     return minutes + ":"  + ( seconds < 10 ? "0" : "" ) + seconds;
+  };
+
+  const playTrack = async (id, name, artists, image, context_uri, track_number) => {
+    const response = await axios.post(
+      `https://api.spotify.com/v1/me/player/play`,
+      {
+        context_uri,
+        offset: {
+          position: track_number-1,
+        },
+        position_ms: 0,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status===204) {
+      const currentlyPlaying = {
+        id,
+        name,
+        artists,
+        image,
+      };
+      dispatch ({type: reducerCases.SET_PLAYING, currentlyPlaying});
+      dispatch ({type: reducerCases.SET_PLAYER_STATE, playerState: true});
+    }
+    else {
+      dispatch ({type: reducerCases.SET_PLAYER_STATE, playerState: true});
+    }
   }
 
   return <Container headerBackground={ headerBackground }>
@@ -94,7 +125,7 @@ export default function Body({ headerBackground }) {
                   index
                 ) => {
                   return (
-                    <div className="row" key={id}>
+                    <div className="row" key={id} onClick={()=> playTrack(id, name, artists, image, context_uri, track_number)}>
                       <div className="col">
                         <span>{index + 1}</span>
                       </div>
